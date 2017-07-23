@@ -4,91 +4,96 @@
 // is properly working. The `data` variable is an array with 25 items in it
 console.log(data);
 
-
-
 // 1: Show me how to calculate the average price of all items.
 function question1 () {
   // Answer:
   let sum = 0;
   let avg = 0;
-  for(let i=0; i<data.length; i++) {
-    sum += data[i].price;
-  }
+  data.forEach(function(item) {
+    sum += item.price;
+  })
   avg = sum / data.length;
   return '$' + avg;
 }
 
-
+console.log('question 1', question1());
 
 // 2: Show me how to get an array of items that cost between $14.00 and $18.00 USD
 function question2 () {
   // Answer:
   let newArr = [];
-  for(let i=0; i<data.length; i++) {
-    if(data[i].price > 14 && data[i].price < 18) {
-      newArr.push(data[i].title);
+  data.forEach(function(item) {
+    if(item.price > 14 && item.price < 18) {
+      newArr.push(item.title);
     }
-  }
+  })
   return newArr;
 }
 
-
+console.log('question 2', question2());
 
 // 3: Which item has a "GBP" currency code? Display it's name and price.
 function question3 () {
   // Answer:
   let britArr = [];
-  for(let i=0; i<data.length; i++) {
-    if(data[i].currency_code === 'GBP') {
-      britArr.push(data[i].title);
+  let result = '';
+  data.forEach(function(item) {
+    if(item.currency_code === 'GBP') {
+      result = `${ item.title } - $${ item.price } GBP`;
+      britArr.push(result);
     }
-  }
+  })
   return britArr;
 }
 
+console.log('question 3', question3());
 
 // 4: Display a list of all items who are made of wood.
 function question4 () {
   // Answer:
   let woodArr = [];
-  for(let i=0; i<data.length; i++) {
-    for(let j=0; j<data[i].materials.length; j++) {
-      if(data[i].materials[j] === 'wood') {
-        woodArr.push(data[i].title);
+  data.forEach(function(item) {
+    item.materials.forEach(function(material) {
+      if(material === 'wood') {
+        woodArr.push(item.title);
       }
-    }
-  }
+    })
+  })
   return woodArr;
 }
 
+console.log('question 4', question4());
 
 // 5: Which items are made of eight or more materials?
 //    Display the name, number of items and the items it is made of.
 function question5 () {
   // Answer:
   let multiMaterialArr = [];
-  for(let i=0; i<data.length; i++) {
-    if(data[i].materials.length >= 8) {
+  data.forEach(function(item) {
+    if(item.materials.length >= 8) {
       let newItem = {};
-      newItem.title = data[i].title;
-      newItem.matNum = data[i].materials.length;
-      newItem.materials = data[i].materials;
+      newItem.title = item.title;
+      newItem.matNum = item.materials.length;
+      newItem.materials = item.materials;
       multiMaterialArr.push(newItem);
     }
-  }
+  })
   return multiMaterialArr;
 }
 
+console.log('question 5', question5());
 
 // 6: How many items were made by their sellers?
 // Answer:
 function question6 () {
   // Answer:
   let iMadeArr = [];
-  for(let i=0; i<data.length; i++) {
-    if(data[i].who_made === 'i_did') {
-      iMadeArr.push(data[i]);
+  data.forEach(function(item) {
+    if(item.who_made === 'i_did') {
+      iMadeArr.push(item);
     }
-  }
+  })
   return iMadeArr.length;
 }
+
+console.log('question 6', question6());
